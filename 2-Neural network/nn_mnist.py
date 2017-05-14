@@ -25,13 +25,13 @@ f = gzip.open('mnist.pkl.gz', 'rb')
 train_set, valid_set, test_set = cPickle.load(f)
 f.close()
 
-train_x, train_y = train_set
+train_x, train_y = train_set[:7000]
 train_y = one_hot(train_y, 10)
 
-valid_x, valid_y = valid_set
+valid_x, valid_y = valid_set[7000:8500]
 valid_y = one_hot(valid_y, 10)
 
-test_x, test_y = test_set
+test_x, test_y = test_set[8500:]
 test_y = one_hot(test_y, 10)
 
 x = tf.placeholder("float", [None, 784])  # samples
@@ -62,9 +62,6 @@ batch_size = 20
 last_valid_data_error = 1000000
 valid_data_error = 0
 epoch = 0
-#train_data_list = []
-#valid_data_list = []
-#train_mean_error=0
 
 while last_valid_data_error - valid_data_error >= 0.001:#for epoch in xrange(100):
     epoch += 1
@@ -99,5 +96,3 @@ for b, r in zip(test_y, test_data):
         error += 1
 print "Conjunto Test"
 print "Epoch #: Test",  "Error test: ", error / total * 100.0, "Porcentaje de exito: ", (1.0-error / total)*100.0, "% de 10000 muestras"
-
-#greedy 90 y 95%
