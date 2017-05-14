@@ -25,13 +25,13 @@ f = gzip.open('mnist.pkl.gz', 'rb')
 train_set, valid_set, test_set = cPickle.load(f)
 f.close()
 
-train_x, train_y = train_set[:7000]
+train_x, train_y = train_set[:35000]
 train_y = one_hot(train_y, 10)
 
-valid_x, valid_y = valid_set[7000:8500]
+valid_x, valid_y = valid_set[35000:42500]
 valid_y = one_hot(valid_y, 10)
 
-test_x, test_y = test_set[8500:]
+test_x, test_y = test_set[42500:]
 test_y = one_hot(test_y, 10)
 
 x = tf.placeholder("float", [None, 784])  # samples
